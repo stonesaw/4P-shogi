@@ -88,12 +88,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>c:\source\DxLib-Programs\DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source\DxLib-Programs\DxLib;c:\source\DxLib-Programs\4P-shogi\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>c:\source\DxLib-Programs\DxLib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>c:\source\DxLib-Programs\DxLib;c:\source\DxLib-Programs\4P-shogi\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,6 +150,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\General.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\General.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

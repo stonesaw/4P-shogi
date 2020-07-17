@@ -2,14 +2,16 @@
 
 class Window {
 public:
-    int base_width = 640;
-    int base_height = 480;
+    int base_width;
+    int base_height;
     double scale;
     int width;
     int height;
 
-    Window(double scale) {
+    Window(double scale = 1.0, int width = 640, int height = 480) {
         this->scale = scale;
+        this->base_width = width;
+        this->base_height = height;
         this->width = (int)(base_width * this->scale);
         this->height = (int)(base_height * this->scale);
     }
@@ -24,11 +26,11 @@ public:
     int width, height;
     int masu_size;
     int color;
-    int scale;
     int line_width;
+    double scale;
     
 
-    Ban(Window window, int masu_size, unsigned int color, int line_width) {
+    Ban(Window window, int masu_size, unsigned int color, int line_width = 2) {
         this->masu_size = (int)(masu_size * window.scale);
         this->width = this->masu_size * 9;
         this->height = this->masu_size * 9;
@@ -47,7 +49,12 @@ public:
 class Mouse {
 public:
     int posX, posY;
-    int mapX = -2, mapY = -2;
+    int mapX, mapY;
+
+    Mouse() {
+        this->posX = -1, this->posY = -1;
+        this->mapX = -1, this->mapY = -1;
+    }
 
     void Update();
     bool isBanOn(Ban ban);

@@ -1,9 +1,11 @@
 #pragma once
+#include <string>
+
 
 class Window {
-public:
     int base_width;
     int base_height;
+public:
     double scale;
     int width;
     int height;
@@ -22,27 +24,35 @@ public:
 
 class Ban {
 public:
+    int base_ox, base_oy;
+    int base_width, base_height;
+    double base_scale;
     int ox, oy;
-    int width, height;
-    int masu_size;
-    int color;
-    int line_width;
+    int size;
     double scale;
+    int color;
+    int masu_size;
+    int line_width;
     
+    Ban(Window window, int color, double base_scale = 0.8, double scale = 0.85, int line_width = 2) {
+        int windowMinSize = min(window.width, window.height);
+        this->base_scale = base_scale;
+        this->base_width = windowMinSize * base_scale;
+        this->base_height = windowMinSize * base_scale;
+        this->base_ox = (window.width - this->base_width) / 2;
+        this->base_oy = (window.height - this->base_height) / 2;
 
-    Ban(Window window, int masu_size, unsigned int color, int line_width = 2) {
-        this->masu_size = (int)(masu_size * window.scale);
-        this->width = this->masu_size * 9;
-        this->height = this->masu_size * 9;
-        this->ox = (window.width - this->width) / 2;
-        this->oy = (window.height - this->height) / 2;
+        this->scale = scale;
+        this->size = this->base_width * this->scale;
+        this->ox = this->base_ox + (this->base_width - this->size) / 2;
+        this->oy = this->base_oy + (this->base_height - this->size) / 2;
+        this->masu_size = (this->size / 9);
         this->color = color;
-        this->scale = window.scale;
-        this->line_width = line_width;
+        this->line_width = line_width * window.scale;
     }
 
-    void DrawBase(Window window);
-    void DrawFrame(Window window);
+    void DrawBase();
+    void DrawFrame();
 };
 
 
@@ -61,5 +71,5 @@ public:
     void SetMapPoint(Ban ban);
     //int CheckMouseOnX(Window window, Ban ban);
     //int CheckMouseOnY(Window window, Ban ban);
-    void DrawBanShade(Window window, Ban ban);
+    void DrawBanShade(Ban ban);
 };

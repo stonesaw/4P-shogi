@@ -9,14 +9,13 @@
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    Window window(2);
-    Ban ban(window, 40, GetColor(255, 200, 65), 2);
+    Window window(2); // able to change (screen scale)
+    Ban ban(window, GetColor(255, 200, 65));
     Mouse mouse;
 
     SetGraphMode(window.width, window.height, 32);
     SetBackgroundColor(255, 255, 255);
     ChangeWindowMode(TRUE);
-
     SetFontSize(32);
 
     if (DxLib_Init() == -1) {
@@ -35,10 +34,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         mouse.SetMapPoint(ban);
         
         // draw
-        window.DrawBG(255, 255, 255);
-        ban.DrawBase(window);
-        mouse.DrawBanShade(window, ban);
-        ban.DrawFrame(window);
+        window.DrawBG(240, 240, 240);
+        ban.DrawBase();
+        mouse.DrawBanShade(ban);
+        ban.DrawFrame();
 
         WaitTimer(10);
     }

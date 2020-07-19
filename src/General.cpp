@@ -12,6 +12,7 @@ void Mouse::Update() {
     GetMousePoint(&posX, &posY);
 }
 
+
 bool Mouse::isBanOn(Ban ban) {
     if (ban.ox <= this->posX && this->posX <= ban.ox + ban.size &&
         ban.oy <= this->posY && this->posY <= ban.oy + ban.size) {
@@ -21,6 +22,7 @@ bool Mouse::isBanOn(Ban ban) {
         return false;
     }
 }
+
 
 void Mouse::SetMapPoint(Ban ban) {
     if (this->isBanOn(ban)) {
@@ -33,6 +35,7 @@ void Mouse::SetMapPoint(Ban ban) {
     }
 }
 
+
 void Mouse::DrawBanShade(Ban ban) {
     if (this->isBanOn(ban)) {
         DrawBox(ban.ox +  this->mapX      * ban.masu_size, ban.oy +  this->mapY      * ban.masu_size,
@@ -40,27 +43,6 @@ void Mouse::DrawBanShade(Ban ban) {
             GetColor(240, 181, 46), TRUE);
     }
 }
-
-
-/*
-BanBase::BanBase(Window window, std::string type, int ox, int oy, int width = 0, int height = 0, double scale = 1.0, int color = GetColor(0, 0, 0)) {
-    this->scale = scale;
-    this->color = color;
-    if (type == "square") {
-        this->type = type;
-        double windowSize = pow(window.width, 2.0) + pow(window.height, 2.0);
-        int size = sqrt(windowSize * pow(scale, 2.0));
-        this->width = size;
-        this->height = size;
-    }
-    else if (type == "rect") {
-
-    }
-    else {
-        throw stderr;
-    }
-}
-*/
 
 
 void Ban::DrawBase() {
@@ -80,4 +62,3 @@ void Ban::DrawFrame() {
                 GetColor(0, 0, 0), TRUE);
     }
 }
-

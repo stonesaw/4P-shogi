@@ -3,7 +3,7 @@
 #include "Clac.h"
 
 /*
-    4P-shogi : 4�l����
+    4P-shogi : 4人将棋
 
     Author stonesaw
 */

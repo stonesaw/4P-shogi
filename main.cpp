@@ -1,22 +1,24 @@
 #include "DxLib.h"
 #include "General.h"
+#include "Clac.h"
 
 /*
-    4P-shogi : 4êlè´ä˚
+    4P-shogi : 4ÔøΩlÔøΩÔøΩÔøΩÔøΩ
 
     Author stonesaw
 */
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    Window window(2); // able to change (screen scale)
+    Window window(1.5); // able to change (screen scale)
     Ban ban(window, GetColor(255, 200, 65));
     Mouse mouse;
+    Calc calc;
 
     SetGraphMode(window.width, window.height, 32);
     SetBackgroundColor(255, 255, 255);
     ChangeWindowMode(TRUE);
-    SetFontSize(32);
+    SetFontSize(ban.masu_size * 0.4);
 
     if (DxLib_Init() == -1) {
         return -1;
@@ -37,6 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         window.DrawBG(240, 240, 240);
         ban.DrawBase();
         mouse.DrawBanShade(ban);
+        ban.DrawPiece(calc);
         ban.DrawFrame();
 
         WaitTimer(10);

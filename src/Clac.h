@@ -1,42 +1,34 @@
 #pragma once
 #include <string>
+#include <vector>
 
 
 class Piece {
 public:
-    std::string name;
-    unsigned int player;
+    int id;
+    int player;
     bool canMove;
+
+    Piece(int id = -1, int player = -1, bool canMove = false) {
+        this->id = id; // 1 - 16 (0 is empty) (-1 is out of board)
+        this->player = player; // 0 or 1 (TO DO change player size)
+        this->canMove = canMove;
+    }
 };
 
 
-class CalcBase {
+class Calc {
+private:
+    template<typename T>
+    std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);
+
 public:
-    std::string pieceKind[17] = {
-        /*  index
-        0    1     2     3     4     5       6     7     8*/
-        "", "ï‡", "çÅ", "åj", "ã‚", "ã‡",   "äp", "îÚ", "ã ",
-        //   9     10    11    12    13      14    15    16
-            "Ç∆", "à«", "å\", "ëS", "None", "în", "ó≥", "None"
-    };
-    int pieceStarter[3][9] = {
+    std::vector<std::vector<Piece>> board;
+    std::vector<std::vector<int>> pieceStarter = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1},
         {0, 6, 0, 0, 0, 0, 0, 7, 0},
         {2, 3, 4, 5, 8, 5, 4, 3, 2}
     };
-protected:
-    template<typename T>
-    void rotate2dAry(T ary, std::string direction, unsigned int times);
 
-};
-
-
-class Calc : CalcBase {
-public:
-    int board[9 + 2][9 + 2]; // +2 : check board inside
-    
     Calc();
-    void init();
 };
-
-

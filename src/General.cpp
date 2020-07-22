@@ -1,13 +1,15 @@
 #include "DxLib.h"
 #include "General.h"
+#include "Clac.h"
 
 
-
+/* class Window */
 void Window::DrawBG(int red, int green, int blue) {
     DrawBox(0, 0, this->width, this->height, GetColor(red, green, blue), TRUE);
 }
 
 
+/* class Mouse */
 void Mouse::Update() {
     GetMousePoint(&posX, &posY);
 }
@@ -45,6 +47,25 @@ void Mouse::DrawBanShade(Ban ban) {
 }
 
 
+/* class Ban */
+Ban::Ban(Window window, int color, double base_scale, double scale, int line_width) {
+    int windowMinSize = min(window.width, window.height);
+    this->base_scale = base_scale;
+    this->base_width = (double)windowMinSize * base_scale;
+    this->base_height = (double)windowMinSize * base_scale;
+    this->base_ox = (window.width - this->base_width) / 2;
+    this->base_oy = (window.height - this->base_height) / 2;
+
+    this->scale = scale;
+    this->size = (int)(this->base_width * this->scale);
+    this->ox = this->base_ox + (this->base_width - this->size) / 2;
+    this->oy = this->base_oy + (this->base_height - this->size) / 2;
+    this->masu_size = (this->size / 9);
+    this->color = color;
+    this->line_width = line_width * window.scale;
+}
+
+
 void Ban::DrawBase() {
     DrawBox(this->base_ox, this->base_oy, this->base_ox + this->base_width, this->base_oy + this->base_height, this->color, TRUE);
 }
@@ -62,3 +83,18 @@ void Ban::DrawFrame() {
                 GetColor(0, 0, 0), TRUE);
     }
 }
+
+void Ban::DrawPiece(Calc calc) {
+    for (int y = 0; y < 9; y++) {
+        for (int x = 0; x < 9; x++) {
+            DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
+                GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
+        }
+    }
+}
+
+
+/* class ImageLoader */
+//std::vector<int> ImageLoader::Loader(std::vector<std::vector<std::string>> strVec) {
+//
+//}

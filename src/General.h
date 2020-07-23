@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
+#include <fstream>
 #include "Clac.h"
 
 
@@ -60,7 +62,19 @@ public:
     void DrawBanShade(Ban ban);
 };
 
-//class ImageLoader {
-//public:
-//    std::vector<int> Loader(std::vector<std::vector<std::string>>);
-//};
+/* func ImageLoader */
+inline bool file_exists(const char* str) {
+    std::ifstream fs(str);
+    return fs.is_open();
+}
+
+
+inline std::map<std::string, int> imageLoader(std::vector<std::vector<const char*>> nameAndPath) {
+    std::map<std::string, int> map;
+    for (size_t i = 0; i < nameAndPath.size(); i++) {
+        if (file_exists(nameAndPath.at(i).at(1))) 
+            throw std::invalid_argument("ImageLoder wrong to Path!");
+        map[nameAndPath.at(i).at(0)] = LoadGraph(nameAndPath.at(i).at(1));
+    }
+    return map;
+}

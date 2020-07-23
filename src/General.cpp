@@ -92,9 +92,3 @@ void Ban::DrawPiece(Calc calc) {
         }
     }
 }
-
-
-/* class ImageLoader */
-//std::vector<int> ImageLoader::Loader(std::vector<std::vector<std::string>> strVec) {
-//
-//}

@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // TO DO : please add other images
         // argment is { "name_var", "path" } ...
         std::map<std::string, int> image = ImageLoader::Load({
-            {"fu", "./../lib/image/fuhyou.png"}
+            {"fu", "./lib/image/fuhyou.png"}
             });
 
         Ban ban(window, GetColor(255, 200, 65));

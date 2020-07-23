@@ -31,4 +31,7 @@ public:
     };
 
     Calc();
+
+    static std::string id2name(size_t id);
+    static size_t name2id(std::string);
 };

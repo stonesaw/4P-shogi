@@ -15,7 +15,9 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
         Window window(1.5); // able to change (screen scale)
-        std::map<std::string, int> image = imageLoader({
+        // TO DO : please add other images
+        // argment is { "name_var", "path" } ...
+        std::map<std::string, int> image = ImageLoader::Load({
             {"fu", "./../lib/image/fuhyou.png"}
             });
 
@@ -35,6 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // main loop
         while (1) {
             if (ProcessMessage() == -1 || CheckHitKey(KEY_INPUT_ESCAPE)) {
+                std::cout << "Exit!" << std::endl;
                 DxLib_End();
                 return 0;
             }
@@ -47,25 +50,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             window.DrawBG(240, 240, 240);
             ban.DrawBase();
             mouse.DrawBanShade(ban);
-            ban.DrawPiece(calc);
+            ban.DrawPiece(calc, image);
             ban.DrawFrame();
 
             WaitTimer(10);
         }
 
+        std::cout << "Exit!" << std::endl;
         WaitKey();
         DxLib_End();
 
     }
     catch (std::invalid_argument& e) {
-        std::cout << e.what() << std::endl;
-
+        std::cout << "Argument Error : " << e.what() << std::endl;
         DxLib_End();
         return 0;
     }
     catch (...) {
+        std::cout << "Error!" << std::endl;
         DxLib_End();
-
         return 0;
     }
 

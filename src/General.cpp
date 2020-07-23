@@ -84,11 +84,34 @@ void Ban::DrawFrame() {
     }
 }
 
-void Ban::DrawPiece(Calc calc) {
+void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {
+            // TO DO : DrawFormatString() -> DrawExtendGraph()
+            // masu_size‚ð‡‚í‚¹‚Ä•`‰æ(Šg‘åork¬)
+            // Calc::id2name‚ðŽg‚Á‚Äid‚ðname‚É’u‚«Š·‚¦‚Ä...
+            // image["‹î‚Ì–¼‘O"] ‚Åhandle‚ªŽæ‚ê‚é
+
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
         }
     }
+}
+
+
+/* class ImageLoader */
+bool ImageLoader::file_exists(const char* str) {
+    std::ifstream fs(str);
+    return fs.is_open();
+}
+
+
+std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<const char*>> nameAndPath) {
+    std::map<std::string, int> map;
+    for (size_t i = 0; i < nameAndPath.size(); i++) {
+        if (file_exists(nameAndPath.at(i).at(1)))
+            throw std::invalid_argument("ImageLoder::Load() [Wrong to Path!]");
+        map[nameAndPath.at(i).at(0)] = LoadGraph(nameAndPath.at(i).at(1));
+    }
+    return map;
 }

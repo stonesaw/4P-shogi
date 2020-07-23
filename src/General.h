@@ -42,7 +42,7 @@ public:
 
     void DrawBase();
     void DrawFrame();
-    void DrawPiece(Calc calc);
+    void DrawPiece(Calc calc, std::map<std::string, int> image);
 };
 
 
@@ -62,19 +62,14 @@ public:
     void DrawBanShade(Ban ban);
 };
 
+
 /* func ImageLoader */
-inline bool file_exists(const char* str) {
-    std::ifstream fs(str);
-    return fs.is_open();
-}
+class ImageLoader {
+    // check file exists
+    static bool file_exists(const char* str);
 
-
-inline std::map<std::string, int> imageLoader(std::vector<std::vector<const char*>> nameAndPath) {
-    std::map<std::string, int> map;
-    for (size_t i = 0; i < nameAndPath.size(); i++) {
-        if (file_exists(nameAndPath.at(i).at(1))) 
-            throw std::invalid_argument("ImageLoder wrong to Path!");
-        map[nameAndPath.at(i).at(0)] = LoadGraph(nameAndPath.at(i).at(1));
-    }
-    return map;
-}
+public:
+    // return : map<"name", handle>
+    // using LoadGraph Because Don't use always
+    static std::map<std::string, int> Load(std::vector<std::vector<const char*>> nameAndPath);
+};

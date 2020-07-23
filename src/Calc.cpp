@@ -49,3 +49,14 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
         return vec;
     }
 }
+
+// TO DO
+// Developnoteを見て引数のidから駒の名前(name_var)を返すプログラムを書こう
+std::string Calc::id2name(size_t id) {
+    return "str";
+}
+
+// TO DO : 上の逆 駒の名前(name_var)からid
+size_t Calc::name2id(std::string name) {
+    return 0;
+}

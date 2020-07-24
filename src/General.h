@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <fstream>
+#include "DxLib.h"
 #include "Clac.h"
 
 
@@ -65,7 +66,6 @@ public:
 
 /* func ImageLoader */
 class ImageLoader {
-    // check file exists
     static bool file_exists(const char* str);
 
 public:

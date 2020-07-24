@@ -1,5 +1,4 @@
 #include "Clac.h"
-#include <vector>
 
 
 Calc::Calc() {

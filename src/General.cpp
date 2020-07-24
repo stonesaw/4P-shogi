@@ -1,6 +1,4 @@
-#include "DxLib.h"
 #include "General.h"
-#include "Clac.h"
 
 
 /* class Window */
@@ -16,8 +14,8 @@ void Mouse::Update() {
 
 
 bool Mouse::isBanOn(Ban ban) {
-    if (ban.ox <= this->posX && this->posX <= ban.ox + ban.size &&
-        ban.oy <= this->posY && this->posY <= ban.oy + ban.size) {
+    if (ban.ox <= this->posX && this->posX < ban.ox + ban.size - ban.line_width &&
+        ban.oy <= this->posY && this->posY < ban.oy + ban.size - ban.line_width) {
         return true;
     }
     else {

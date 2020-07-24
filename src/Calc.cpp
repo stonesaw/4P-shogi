@@ -51,8 +51,7 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
     }
 }
 
-// TO DO
-// Developnoteを見て引数のidから駒の名前(name_var)を返すプログラムを書こう
+// 引数のidから駒の名前(name_var)を返す
 std::string Calc::id2name(size_t id) {
     if (id > 17 && id < 0)
         throw std::invalid_argument("Calc::id2name()");
@@ -60,14 +59,13 @@ std::string Calc::id2name(size_t id) {
     return Calc::name_var[id];
 }
 
-// TO DO : 上の逆 駒の名前(name_var)からid
+// 駒の名前(name_var)からidを返す
 size_t Calc::name2id(std::string name) {
     for (int i = 0; i < 17; i++)
     {
         if (name == Calc::name_var[i])
-            
+            int id = i;
             break;
     }
-
-    return i;
+    return id;
 }

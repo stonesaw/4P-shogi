@@ -2,8 +2,8 @@
 #include <string>
 #include <map>
 #include "DxLib.h"
-#include "General.h"
-#include "Clac.h"
+#include "src/General.h"
+#include "src/Clac.h"
 
 /*
     4P-shogi
@@ -18,7 +18,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // TO DO : please add other images
         // argment is { "name_var", "path" } ...
         std::map<std::string, int> image = ImageLoader::Load({
-            {"fu", "./lib/image/fuhyou.png"}
+            {"fu", "./lib/image/fuhyou.png"},
+            {"gin", "./lib/image/ginshou.png"},
+            {"hi", "./lib/image/hisha.png"},
+            {"kaku", "./lib/image/kakugyou.png"},
+            {"kei", "./lib/image/keima.png"},
+            {"kyou", "./lib/image/kyousha.png"},
+            {"kin", "./lib/image/kinshou.png"},
+            {"ou", "./lib/image/oushou.png"},
+            {"to", "./lib/image/tokin.png"},
+            {"ngin", "./lib/image/narigin.png"},
+            {"ryuu", "./lib/image/ryuuou.png"},
+            {"uma", "./lib/image/ryuuma.png"},
+            {"nkei", "./lib/image/narikei.png"},
+            {"nkyou", "./lib/image/narikyou.png"}
             });
 
         Ban ban(window, GetColor(255, 200, 65));

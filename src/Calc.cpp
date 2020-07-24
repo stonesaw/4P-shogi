@@ -53,6 +53,7 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
 // TO DO
 // Developnote‚ğŒ©‚Äˆø”‚Ìid‚©‚ç‹î‚Ì–¼‘O(name_var)‚ğ•Ô‚·ƒvƒƒOƒ‰ƒ€‚ğ‘‚±‚¤
 std::string Calc::id2name(size_t id) {
+    
     return "str";
 }
 

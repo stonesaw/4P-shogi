@@ -19,19 +19,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // argment is { "name_var", "path" } ...
         std::map<std::string, int> image = ImageLoader::Load({
             {"fu", "./lib/image/fuhyou.png"},
-            {"gin", "./lib/image/ginshou.png"},
-            {"hi", "./lib/image/hisha.png"},
-            {"kaku", "./lib/image/kakugyou.png"},
+            {"kyo", "./lib/image/kyousha.png"},
             {"kei", "./lib/image/keima.png"},
-            {"kyou", "./lib/image/kyousha.png"},
+            {"gin", "./lib/image/ginshou.png"},
             {"kin", "./lib/image/kinshou.png"},
+            {"kaku", "./lib/image/kakugyou.png"},
+            {"hisya", "./lib/image/hisha.png"},
             {"ou", "./lib/image/oushou.png"},
-            {"to", "./lib/image/tokin.png"},
-            {"ngin", "./lib/image/narigin.png"},
-            {"ryuu", "./lib/image/ryuuou.png"},
+            {"tokin", "./lib/image/tokin.png"},
+            {"narikyo", "./lib/image/narikyou.png"},
+            {"narikei", "./lib/image/narikei.png"},
+            {"narigin", "./lib/image/narigin.png"},
             {"uma", "./lib/image/ryuuma.png"},
-            {"nkei", "./lib/image/narikei.png"},
-            {"nkyou", "./lib/image/narikyou.png"}
+            {"ryu", "./lib/image/ryuuou.png"}
             });
 
         Ban ban(window, GetColor(255, 200, 65));

@@ -21,6 +21,10 @@ class Calc {
 private:
     template<typename T>
     std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);
+    static std::string name_var[17] = {
+        "enpty","fu","kyo","kei","gin","kin","kaku","hisya","ou","tokin",
+        "narikyo","narikei","narigin","none","uma","ryu","none"
+    };
 
 public:
     std::vector<std::vector<Piece>> board;

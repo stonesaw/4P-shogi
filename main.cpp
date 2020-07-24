@@ -15,8 +15,6 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
         Window window(1.5); // able to change (screen scale)
-        // TO DO : please add other images
-        // argment is { "name_var", "path" } ...
         std::map<std::string, int> image = ImageLoader::Load({
             {"fu", "./lib/image/fuhyou.png"},
             {"kyo", "./lib/image/kyousha.png"},

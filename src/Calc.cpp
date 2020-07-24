@@ -1,5 +1,6 @@
 #include "Clac.h"
 #include <vector>
+#include <stdexcept>
 
 
 Calc::Calc() {
@@ -53,11 +54,20 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
 // TO DO
 // Developnoteを見て引数のidから駒の名前(name_var)を返すプログラムを書こう
 std::string Calc::id2name(size_t id) {
-    
-    return "str";
+    if (id > 17 && id < 0)
+        throw std::invalid_argument("Calc::id2name()");
+
+    return Calc::name_var[id];
 }
 
 // TO DO : 上の逆 駒の名前(name_var)からid
 size_t Calc::name2id(std::string name) {
-    return 0;
+    for (int i = 0; i < 17; i++)
+    {
+        if (name == Calc::name_var[i])
+            
+            break;
+    }
+
+    return i;
 }

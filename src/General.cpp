@@ -91,8 +91,6 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
             // masu_size‚ð‡‚í‚¹‚Ä•`‰æ(Šg‘åork¬)
             // Calc::id2name‚ðŽg‚Á‚Äid‚ðname‚É’u‚«Š·‚¦‚Ä...
             // image["‹î‚Ì–¼‘O"] ‚Åhandle‚ªŽæ‚ê‚é
-
-            DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y, ,TRUE);
         }
     }
 }

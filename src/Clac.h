@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 
 class Piece {
@@ -24,13 +25,13 @@ private:
     template<typename T>
     std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);
 
-    std::string name_var[17] = {
+    // use in Update()
+    std::string setMoveType(size_t id); // set "map" or "proceed"
+
+    std::vector<std::string> name_var = {
         "enpty", "fu",    "kyo",     "kei",     "gin",     "kin",  "kaku", "hisya", "ou",
                  "tokin", "narikyo", "narikei", "narigin", "none", "uma",  "ryu",   "none"
     };
-
-    // use in Update()
-    std::string setMoveType(size_t id); // set "map" or "proceed"  
 
     std::vector<std::vector<int>> pieceStarter = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -52,6 +53,6 @@ public:
     void Update();
 
     // Base Method
-    static std::string id2name(size_t id);
-    static size_t name2id(std::string);
+    std::string id2name(size_t id);
+    size_t name2id(std::string);
 };

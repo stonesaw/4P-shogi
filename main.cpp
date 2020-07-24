@@ -2,8 +2,8 @@
 #include <string>
 #include <map>
 #include "DxLib.h"
-#include "General.h"
-#include "Clac.h"
+#include "src/General.h"
+#include "src/Clac.h"
 
 /*
     4P-shogi
@@ -15,10 +15,21 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
         Window window(1.5); // able to change (screen scale)
-        // TO DO : please add other images
-        // argment is { "name_var", "path" } ...
         std::map<std::string, int> image = ImageLoader::Load({
-            {"fu", "./lib/image/fuhyou.png"}
+            {"fu", "./lib/image/fuhyou.png"},
+            {"kyo", "./lib/image/kyousha.png"},
+            {"kei", "./lib/image/keima.png"},
+            {"gin", "./lib/image/ginshou.png"},
+            {"kin", "./lib/image/kinshou.png"},
+            {"kaku", "./lib/image/kakugyou.png"},
+            {"hisya", "./lib/image/hisha.png"},
+            {"ou", "./lib/image/oushou.png"},
+            {"tokin", "./lib/image/tokin.png"},
+            {"narikyo", "./lib/image/narikyou.png"},
+            {"narikei", "./lib/image/narikei.png"},
+            {"narigin", "./lib/image/narigin.png"},
+            {"uma", "./lib/image/ryuuma.png"},
+            {"ryu", "./lib/image/ryuuou.png"}
             });
 
         Ban ban(window, GetColor(255, 200, 65));

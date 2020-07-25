@@ -3,13 +3,13 @@
 
 Calc::Calc() {
     // size = 9+2 : check out of board
-    this->board.resize(11, std::vector<Piece>(11, (-1, -1, false)));
+    this->board.resize(11, std::vector<Piece>(11, (-1, 0)));
     std::vector<std::vector<int>> opponentPieceStarter = rotate2dVector(this->pieceStarter, "reverse");
     for (int y = 0; y < 11; y++) {
         for (int x = 0; x < 11; x++) {
             if (1 <= x && x <= 9 && 1 <= y && y <= 9) {
-                if (y <= 3)      this->board.at(y).at(x) = Piece(opponentPieceStarter[y - 1][x - 1], 1);
-                else if (7 <= y) this->board.at(y).at(x) = Piece(this->pieceStarter[y - 7][x - 1], 0);
+                if (y <= 3)      this->board.at(y).at(x) = Piece(opponentPieceStarter[y - 1][x - 1], 2);
+                else if (7 <= y) this->board.at(y).at(x) = Piece(this->pieceStarter[y - 7][x - 1], 1);
                 else             this->board.at(y).at(x) = Piece(0);
             }
             else {
@@ -48,6 +48,11 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
         return vec;
     }
 }
+
+std::string Calc::setMoveType(size_t id) {
+    return std::string();
+}
+
 
 // ˆø”‚Ìid‚©‚ç‹î‚Ì–¼‘O(name_var)‚ğ•Ô‚·
 /* •ÏX’† fukasato

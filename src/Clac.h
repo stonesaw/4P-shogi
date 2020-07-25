@@ -7,7 +7,7 @@
 class Piece {
 public:
     int id;
-    int player;
+    size_t player;
     bool canMove;
     std::string moveType;
 
@@ -24,8 +24,6 @@ class Calc {
 private:
     template<typename T>
     std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);
-
-    // use in Update()
     std::string setMoveType(size_t id); // set "map" or "proceed"
 
     std::vector<std::string> name_var = {

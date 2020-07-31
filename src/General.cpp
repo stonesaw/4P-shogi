@@ -141,8 +141,8 @@ std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<std::string
         std::string path = nameAndPath.at(i).at(1);
         if (!file_exists(path.c_str()))
             throw std::invalid_argument("ImageLoder::Load() [Wrong to Path! '" + path + "']");
-
-        map[nameAndPath.at(i).at(0)] = LoadGraph(name.c_str());
+        else
+            map[name] = LoadGraph(path.c_str());
     }
     return map;
 }

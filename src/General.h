@@ -3,7 +3,11 @@
 #include <vector>
 #include <map>
 #include <fstream>
+#include "DxLib.h"
 #include "Clac.h"
+#include <filesystem>
+
+const std::filesystem::path PATH = std::filesystem::current_path();
 
 
 class Window {
@@ -47,29 +51,32 @@ public:
 
 
 class Mouse {
-public:
-    int posX, posY;
-    int mapX, mapY;
+    bool is_click = false;
+    //int beforePosX = -1, beforePosY = -1;
 
-    Mouse() {
-        this->posX = -1, this->posY = -1;
-        this->mapX = -1, this->mapY = -1;
-    }
+public:
+    int posX = -1, posY = -1;
+    int mapX = -1, mapY = -1;
+    bool isChoose = false;
+    int chooseX = -1, chooseY = -1;
 
     void Update();
     bool isBanOn(Ban ban);
+    bool isClick();
     void SetMapPoint(Ban ban);
     void DrawBanShade(Ban ban);
 };
 
 
-/* func ImageLoader */
+/* class ImageLoader */
 class ImageLoader {
-    // check file exists
     static bool file_exists(const char* str);
 
 public:
     // return : map<"name", handle>
     // using LoadGraph Because Don't use always
-    static std::map<std::string, int> Load(std::vector<std::vector<const char*>> nameAndPath);
+    static std::map<std::string, int> Load(std::vector<std::vector<std::string>> nameAndPath);
+    
+    static std::vector<std::vector<std::string>> data;
+    static void currentDir();
 };

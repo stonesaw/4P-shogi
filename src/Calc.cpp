@@ -1,16 +1,15 @@
 #include "Clac.h"
-#include <vector>
 
 
 Calc::Calc() {
     // size = 9+2 : check out of board
-    this->board.resize(11, std::vector<Piece>(11, (-1, -1, false)));
+    this->board.resize(11, std::vector<Piece>(11, (-1, 0)));
     std::vector<std::vector<int>> opponentPieceStarter = rotate2dVector(this->pieceStarter, "reverse");
     for (int y = 0; y < 11; y++) {
         for (int x = 0; x < 11; x++) {
             if (1 <= x && x <= 9 && 1 <= y && y <= 9) {
-                if (y <= 3)      this->board.at(y).at(x) = Piece(opponentPieceStarter[y - 1][x - 1], 1);
-                else if (7 <= y) this->board.at(y).at(x) = Piece(pieceStarter[y - 7][x - 1], 0);
+                if (y <= 3)      this->board.at(y).at(x) = Piece(opponentPieceStarter[y - 1][x - 1], 2);
+                else if (7 <= y) this->board.at(y).at(x) = Piece(this->pieceStarter[y - 7][x - 1], 1);
                 else             this->board.at(y).at(x) = Piece(0);
             }
             else {
@@ -18,6 +17,10 @@ Calc::Calc() {
             }
         }
     }
+    this->turn = 1;
+}
+
+void Calc::Update() {
 }
 
 
@@ -50,13 +53,33 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
     }
 }
 
-// TO DO
-// Developnoteを見て引数のidから駒の名前(name_var)を返すプログラムを書こう
-std::string Calc::id2name(size_t id) {
-    return "str";
+std::string Calc::setMoveType(size_t id) {
+    return std::string();
 }
 
-// TO DO : 上の逆 駒の名前(name_var)からid
-size_t Calc::name2id(std::string name) {
-    return 0;
+
+std::vector<std::vector<int>> Calc::GetPieceMoveMap(std::string name) {
+    return pieceMoveMap[name];
 }
+
+
+// 引数のidから駒の名前(name_var)を返す
+/* 変更中 fukasato
+std::string Calc::id2name(size_t id) {
+    if (id > 17 && id < 0)
+        throw std::invalid_argument("Calc::id2name()");
+
+    return this->name_var[id];
+}
+
+// 駒の名前(name_var)からidを返す
+size_t Calc::name2id(std::string name) {
+    for (int i = 0; i < 17; i++)
+    {
+        if (name == this->name_var[i])
+            int id = i;
+            break;
+    }
+    return id;
+}
+*/

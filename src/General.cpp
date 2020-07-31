@@ -107,6 +107,7 @@ void Ban::DrawFrame() {
     }
 }
 
+
 void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {
@@ -134,13 +135,32 @@ std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<std::string
     for (size_t i = 0; i < nameAndPath.size(); i++) {
         std::string name = nameAndPath.at(i).at(0);
         std::string path = nameAndPath.at(i).at(1);
-        if (file_exists(path.c_str())) {}
+        if (!file_exists(path.c_str()))
             throw std::invalid_argument("ImageLoder::Load() [Wrong to Path! '" + path + "']");
 
         map[nameAndPath.at(i).at(0)] = LoadGraph(name.c_str());
     }
     return map;
 }
+
+
+std::vector<std::vector<std::string>> ImageLoader::data = {
+    { "fu",      "./src/lib/image/fuhyou.png" },
+    { "kyo",     "./src/lib/image/kyousha.png" },
+    { "kei",     "./src/lib/image/keima.png" },
+    { "gin",     "./src/lib/image/ginshou.png" },
+    { "kin",     "./src/lib/image/kinshou.png" },
+    { "kaku",    "./src/lib/image/kakugyou.png" },
+    { "hisya",   "./src/lib/image/hisha.png" },
+    { "ou",      "./src/lib/image/oushou.png" },
+    { "tokin",   "./src/lib/image/tokin.png" },
+    { "narikyo", "./src/lib/image/narikyou.png" },
+    { "narikei", "./src/lib/image/narikei.png" },
+    { "narigin", "./src/lib/image/narigin.png" },
+    { "uma",     "./src/lib/image/ryuuma.png" },
+    { "ryu",     "./src/lib/image/ryuuou.png" }
+};
+
 
 void ImageLoader::currentDir() {
     std::filesystem::path path = std::filesystem::current_path();

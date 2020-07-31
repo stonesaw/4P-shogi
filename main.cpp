@@ -11,25 +11,10 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
-        std::cout << "Current Directory: " << PATH << std::endl;
-        ImageLoader::currentDir();
+        //std::cout << "Current Directory: " << PATH << std::endl;
+        //ImageLoader::currentDir();
         Window window(1.5); // able to change (screen scale)
-        std::map<std::string, int> image = ImageLoader::Load({
-            { "fu",      "lib/image/fuhyou.png" },
-            { "kyo",     "lib/image/kyousha.png" },
-            { "kei",     "lib/image/keima.png" },
-            { "gin",     "lib/image/ginshou.png" },
-            { "kin",     "lib/image/kinshou.png" },
-            { "kaku",    "lib/image/kakugyou.png" },
-            { "hisya",   "lib/image/hisha.png" },
-            { "ou",      "lib/image/oushou.png" },
-            { "tokin",   "lib/image/tokin.png" },
-            { "narikyo", "lib/image/narikyou.png" },
-            { "narikei", "lib/image/narikei.png" },
-            { "narigin", "lib/image/narigin.png" },
-            { "uma",     "lib/image/ryuuma.png" },
-            { "ryu",     "lib/image/ryuuou.png" }
-            });
+        std::map<std::string, int> image = ImageLoader::Load(ImageLoader::data);
 
         Ban ban(window, GetColor(255, 200, 65));
         Mouse mouse;

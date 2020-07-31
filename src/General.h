@@ -76,7 +76,6 @@ public:
     // return : map<"name", handle>
     // using LoadGraph Because Don't use always
     static std::map<std::string, int> Load(std::vector<std::vector<std::string>> nameAndPath);
-    
     static std::vector<std::vector<std::string>> data;
     static void currentDir();
 };

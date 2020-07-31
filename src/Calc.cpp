@@ -1,6 +1,5 @@
 #include "Clac.h"
 
-
 Calc::Calc() {
     // size = 9+2 : check out of board
     this->board.resize(11, std::vector<Piece>(11, (-1, 0)));
@@ -64,7 +63,7 @@ std::vector<std::vector<int>> Calc::GetPieceMoveMap(std::string name) {
 
 
 // 引数のidから駒の名前(name_var)を返す
-/* 変更中 fukasato
+//変更中 fukasato
 std::string Calc::id2name(size_t id) {
     if (id > 17 && id < 0)
         throw std::invalid_argument("Calc::id2name()");
@@ -73,12 +72,19 @@ std::string Calc::id2name(size_t id) {
 }
 
 // 駒の名前(name_var)からidを返す
-/*size_t Calc::name2id(std::string name) {
-    for (int i = 0; i < 17; i++)
+size_t Calc::name2id(std::string name) {
+    int id,check;
+    for (int i = 0; i < 18; i++)
     {
         if (name == this->name_var[i])
-            int id = i;
+        {
+            id = i;
             break;
+        }
+        check = i;
     }
+    if (check = 18)
+        throw std::invalid_argument("Calc::id2name()");
+
     return id;
-}*/
+}

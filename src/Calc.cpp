@@ -81,9 +81,4 @@ std::string Calc::id2name(size_t id) {
             break;
     }
     return id;
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> be4c87524d9e2d58ba87ba895f4c3850fd046b25
-*/
+}*/

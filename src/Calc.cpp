@@ -73,7 +73,7 @@ std::string Calc::id2name(size_t id) {
 }
 
 // ‹î‚Ì–¼‘O(name_var)‚©‚çid‚ð•Ô‚·
-size_t Calc::name2id(std::string name) {
+/*size_t Calc::name2id(std::string name) {
     for (int i = 0; i < 17; i++)
     {
         if (name == this->name_var[i])
@@ -81,5 +81,4 @@ size_t Calc::name2id(std::string name) {
             break;
     }
     return id;
-}
-*/
+}*/

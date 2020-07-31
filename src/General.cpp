@@ -1,6 +1,4 @@
-#include "DxLib.h"
 #include "General.h"
-#include "Clac.h"
 
 
 /* class Window */
@@ -12,17 +10,25 @@ void Window::DrawBG(int red, int green, int blue) {
 /* class Mouse */
 void Mouse::Update() {
     GetMousePoint(&posX, &posY);
+    if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
+        this->is_click = true;
+    else
+        this->is_click = false;
 }
 
 
 bool Mouse::isBanOn(Ban ban) {
-    if (ban.ox <= this->posX && this->posX <= ban.ox + ban.size &&
-        ban.oy <= this->posY && this->posY <= ban.oy + ban.size) {
+    if (ban.ox <= this->posX && this->posX < ban.ox + ban.size - ban.line_width &&
+        ban.oy <= this->posY && this->posY < ban.oy + ban.size - ban.line_width) {
         return true;
     }
     else {
         return false;
     }
+}
+
+bool Mouse::isClick() {
+    return this->is_click;
 }
 
 
@@ -39,9 +45,26 @@ void Mouse::SetMapPoint(Ban ban) {
 
 
 void Mouse::DrawBanShade(Ban ban) {
-    if (this->isBanOn(ban)) {
-        DrawBox(ban.ox +  this->mapX      * ban.masu_size, ban.oy +  this->mapY      * ban.masu_size,
-                ban.ox + (this->mapX + 1) * ban.masu_size, ban.oy + (this->mapY + 1) * ban.masu_size,
+    if (isClick()) {
+        /*if (isBanOn(ban) && chooseX == mapX && chooseY == mapY) {
+            this->isChoose = !this->isChoose;
+        }*/
+        if (isBanOn(ban)) {
+             this->isChoose = true;
+             this->chooseX = mapX;
+             this->chooseY = mapY;
+        }
+        else
+            this->isChoose = false;
+    }
+    if (this->isChoose) {
+        DrawBox(ban.ox + this->chooseX   * ban.masu_size, ban.oy + this->chooseY * ban.masu_size,
+            ban.ox + (this->chooseX + 1) * ban.masu_size, ban.oy + (this->chooseY + 1) * ban.masu_size,
+            GetColor(255, 0, 0), TRUE);
+    }
+    if (this->isBanOn(ban) && !(chooseX == mapX && chooseY == mapY)) {
+        DrawBox(ban.ox + this->mapX * ban.masu_size, ban.oy + this->mapY * ban.masu_size,
+            ban.ox + (this->mapX + 1) * ban.masu_size, ban.oy + (this->mapY + 1) * ban.masu_size,
             GetColor(240, 181, 46), TRUE);
     }
 }
@@ -51,8 +74,8 @@ void Mouse::DrawBanShade(Ban ban) {
 Ban::Ban(Window window, int color, double base_scale, double scale, int line_width) {
     int windowMinSize = min(window.width, window.height);
     this->base_scale = base_scale;
-    this->base_width = (double)windowMinSize * base_scale;
-    this->base_height = (double)windowMinSize * base_scale;
+    this->base_width = windowMinSize * base_scale;
+    this->base_height = windowMinSize * base_scale;
     this->base_ox = (window.width - this->base_width) / 2;
     this->base_oy = (window.height - this->base_height) / 2;
 
@@ -91,6 +114,9 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
             // masu_size‚ð‡‚í‚¹‚Ä•`‰æ(Šg‘åork¬)
             // Calc::id2name‚ðŽg‚Á‚Äid‚ðname‚É’u‚«Š·‚¦‚Ä...
             // image["‹î‚Ì–¼‘O"] ‚Åhandle‚ªŽæ‚ê‚é
+
+            DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
+                GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
         }
     }
 }
@@ -103,12 +129,21 @@ bool ImageLoader::file_exists(const char* str) {
 }
 
 
-std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<const char*>> nameAndPath) {
+std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<std::string>> nameAndPath) {
     std::map<std::string, int> map;
     for (size_t i = 0; i < nameAndPath.size(); i++) {
-        if (file_exists(nameAndPath.at(i).at(1)))
-            throw std::invalid_argument("ImageLoder::Load() [Wrong to Path!]");
-        map[nameAndPath.at(i).at(0)] = LoadGraph(nameAndPath.at(i).at(1));
+        std::string name = nameAndPath.at(i).at(0);
+        std::string path = nameAndPath.at(i).at(1);
+        if (file_exists(path.c_str())) {}
+            throw std::invalid_argument("ImageLoder::Load() [Wrong to Path! '" + path + "']");
+
+        map[nameAndPath.at(i).at(0)] = LoadGraph(name.c_str());
     }
     return map;
 }
+
+void ImageLoader::currentDir() {
+    std::filesystem::path path = std::filesystem::current_path();
+    std::cout << "Current Directory: " << path.string() << std::endl;
+}
+

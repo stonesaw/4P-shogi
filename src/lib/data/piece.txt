@@ -1,0 +1,6 @@
+// piece data
+// can Line Comment Out to use slash( // )
+# fu
+0  1 0
+0 -1 0
+0  0  0

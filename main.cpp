@@ -1,6 +1,6 @@
 #include "DxLib.h"
-#include "General.h"
-#include "Clac.h"
+#include "src/General.h"
+#include "src/Clac.h"
 
 /*
     4P-shogi

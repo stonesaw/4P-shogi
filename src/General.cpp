@@ -108,7 +108,6 @@ void Ban::DrawFrame() {
 }
 
 
-void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
 void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) { 
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {

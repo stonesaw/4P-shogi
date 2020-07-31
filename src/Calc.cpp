@@ -83,7 +83,7 @@ size_t Calc::name2id(std::string name) {
         }
         check = i;
     }
-    if (check = 18)
+    if (check == 18)
         throw std::invalid_argument("Calc::id2name()");
 
     return id;

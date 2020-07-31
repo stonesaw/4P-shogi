@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
 #include <stdexcept>
-
+#include "Data.h"
 
 class Piece {
 public:
@@ -26,25 +27,14 @@ private:
     std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);
     std::string setMoveType(size_t id); // set "map" or "proceed"
 
-    std::vector<std::string> name_var = {
-        "enpty", "fu",    "kyo",     "kei",     "gin",     "kin",  "kaku", "hisya", "ou",
-                 "tokin", "narikyo", "narikei", "narigin", "none", "uma",  "ryu",   "none"
-    };
+    std::vector<std::vector<int>> GetPieceMoveMap(std::string name);
 
-    std::vector<std::vector<int>> pieceStarter = {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {0, 6, 0, 0, 0, 0, 0, 7, 0},
-        {2, 3, 4, 5, 8, 5, 4, 3, 2}
-    };
-
-    std::vector<std::vector<int>> pieceMoveMap = {
-        {0, 1, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
 
 public:
     std::vector<std::vector<Piece>> board;
+    size_t turn;
+    int chooseX = -1, chooseY = -1;
+    bool isChoose = false;
 
     Calc();
 

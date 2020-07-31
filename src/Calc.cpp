@@ -17,6 +17,10 @@ Calc::Calc() {
             }
         }
     }
+    this->turn = 1;
+}
+
+void Calc::Update() {
 }
 
 
@@ -51,6 +55,11 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
 
 std::string Calc::setMoveType(size_t id) {
     return std::string();
+}
+
+
+std::vector<std::vector<int>> Calc::GetPieceMoveMap(std::string name) {
+    return pieceMoveMap[name];
 }
 
 

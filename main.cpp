@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <map>
 #include "DxLib.h"
 #include "General.h"
 #include "Clac.h"
@@ -14,6 +11,8 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
+        std::cout << "Current Directory: " << PATH << std::endl;
+        ImageLoader::currentDir();
         Window window(1.5); // able to change (screen scale)
         std::map<std::string, int> image = ImageLoader::Load({
             { "fu",      "lib/image/fuhyou.png" },
@@ -39,7 +38,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         SetGraphMode(window.width, window.height, 32);
         SetBackgroundColor(255, 255, 255);
         ChangeWindowMode(TRUE);
-        SetFontSize(ban.masu_size * 0.4);
+        SetFontSize((int)(ban.masu_size * 0.4));
 
         if (DxLib_Init() == -1) {
             return -1;
@@ -56,6 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             // update
             mouse.Update();
             mouse.SetMapPoint(ban);
+            calc.Update();
             
             // draw
             window.DrawBG(240, 240, 240);
@@ -74,6 +74,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
     catch (std::invalid_argument& e) {
         std::cout << "Argument Error : " << e.what() << std::endl;
+        DxLib_End();
+        return 0;
+    }
+    catch (std::runtime_error& e) {
+        std::cout << "Runtime Error : " << e.what() << std::endl;
         DxLib_End();
         return 0;
     }

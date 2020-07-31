@@ -21,7 +21,7 @@ public:
 };
 
 
-class Calc {
+class Calc : public Data {
 private:
     template<typename T>
     std::vector<std::vector<T>> rotate2dVector(std::vector<std::vector<T>> vec, std::string direction);

@@ -1,6 +1,9 @@
 # 4P-shogi
 4人対戦の将棋
 
+## C++ Version
+SO C++17 標準 (std:c++17)
+
 ## Debug Setting
 デバッグ時のエラー(例外処理)を見るために、`output.txt`に結果を表示します。  
 以下の設定を行ってください。  

@@ -23,5 +23,6 @@ public:
     //    {0, 0, 0}
     //};
 
-    std::map<std::string, std::vector<std::vector<int>>> pieceMoveMap = DataLoader::LoadMap("src/lib/data/piece.txt");
+
+    std::map<std::string, std::vector<std::vector<int>>> pieceMoveMap; // = DataLoader::LoadMap("src/lib/data/piece.txt");
 };

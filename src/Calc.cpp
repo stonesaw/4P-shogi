@@ -66,7 +66,7 @@ std::vector<std::vector<int>> Calc::GetPieceMoveMap(std::string name) {
 //•ÏX’† fukasato
 std::string Calc::id2name(size_t id) {
     if (id > 17 && id < 0)
-        throw std::invalid_argument("Calc::id2name()");
+        throw std::invalid_argument("Calc::id2name() [argument is out of range!]");
 
     return this->name_var[id];
 }
@@ -78,5 +78,5 @@ size_t Calc::name2id(std::string name) {
             return i;
     }
 
-    throw std::invalid_argument("Calc::id2name()");
+    throw std::invalid_argument("Calc::name2id() [argument is out of range!]");
 }

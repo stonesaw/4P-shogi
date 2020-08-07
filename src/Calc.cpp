@@ -73,18 +73,10 @@ std::string Calc::id2name(size_t id) {
 
 // ‹î‚Ì–¼‘O(name_var)‚©‚çid‚ð•Ô‚·
 size_t Calc::name2id(std::string name) {
-    int id,check;
-    for (int i = 0; i < 18; i++)
-    {
+    for (int i = 0; i < 17; i++) {
         if (name == this->name_var[i])
-        {
-            id = i;
-            break;
-        }
-        check = i;
+            return i;
     }
-    if (check == 18)
-        throw std::invalid_argument("Calc::id2name()");
 
-    return id;
+    throw std::invalid_argument("Calc::id2name()");
 }

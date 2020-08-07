@@ -20,6 +20,7 @@ Calc::Calc() {
 }
 
 void Calc::Update() {
+    turn++;
 }
 
 

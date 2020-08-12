@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "DataLoader.h"
 
 class Data {
 public:
@@ -17,12 +16,32 @@ public:
         {2, 3, 4, 5, 8, 5, 4, 3, 2}
     };
 
-    //std::vector<std::vector<int>> pieceMoveMap = {
-    //    {0, 1, 0},
-    //    {0, 0, 0},
-    //    {0, 0, 0}
-    //};
-
-
-    std::map<std::string, std::vector<std::vector<int>>> pieceMoveMap; // = DataLoader::LoadMap("src/lib/data/piece.txt");
+    const std::vector<std::vector<std::vector<int>>> pieceMoveMap = {
+        { },
+        {
+            {0, 1,  0},
+            {0, -1, 0},
+            {0, 0,  0}
+        },
+        {
+            {1,  0, 1},
+            {0,  0, 0},
+            {0, -1, 0}
+        },
+        {
+            {1,  1, 1},
+            {0, -1, 0},
+            {1,  0, 1}
+        },
+        {
+            {1,  1, 1},
+            {1, -1, 1},
+            {0,  1, 0}
+        },
+        {
+            {1,  1, 1},
+            {1, -1, 1},
+            {1,  1, 1}
+        }
+    };
 };

@@ -53,18 +53,12 @@ std::vector<std::vector<T>> Calc::rotate2dVector(std::vector<std::vector<T>> vec
     }
 }
 
+
 std::string Calc::setMoveType(size_t id) {
     return std::string();
 }
 
 
-std::vector<std::vector<int>> Calc::GetPieceMoveMap(std::string name) {
-    return pieceMoveMap[name];
-}
-
-
-// ˆø”‚Ìid‚©‚ç‹î‚Ì–¼‘O(name_var)‚ð•Ô‚·
-//•ÏX’† fukasato
 std::string Calc::id2name(size_t id) {
     if (id > 17 && id < 0)
         throw std::invalid_argument("Calc::id2name() [argument is out of range!]");
@@ -72,7 +66,7 @@ std::string Calc::id2name(size_t id) {
     return this->name_var[id];
 }
 
-// ‹î‚Ì–¼‘O(name_var)‚©‚çid‚ð•Ô‚·
+
 size_t Calc::name2id(std::string name) {
     for (int i = 0; i < 17; i++) {
         if (name == this->name_var[i])

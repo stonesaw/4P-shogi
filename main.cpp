@@ -43,7 +43,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             // draw
             window.DrawBG(240, 240, 240);
             ban.DrawBase();
-            mouse.DrawBanShade(ban);
+            mouse.DrawBanShade(ban,calc);
             ban.DrawPiece(calc, image);
             ban.DrawFrame();
 

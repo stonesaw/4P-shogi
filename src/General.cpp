@@ -120,11 +120,6 @@ void Ban::DrawFrame() {
 void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) { 
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {
-            // TO DO : DrawFormatString() -> DrawExtendGraph()
-            // masu_sizeを合わせて描画(拡大or縮小)
-            // Calc::id2nameを使ってidをnameに置き換えて...
-            // image["駒の名前"] でhandleが取れる
-
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
             

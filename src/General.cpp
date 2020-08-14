@@ -32,6 +32,15 @@ bool Mouse::isClick() {
 }
 
 
+bool Mouse::onPiece(Calc calc) {
+    int player = calc.board[mapY][mapX].player;
+    int turn = calc.turn % calc.playerSize;
+    if (player == turn)
+        return true;
+    else
+        return false;
+}
+
 void Mouse::SetMapPoint(Ban ban) {
     if (this->isBanOn(ban)) {
         this->mapX = (this->posX - ban.ox) / ban.masu_size;
@@ -44,7 +53,7 @@ void Mouse::SetMapPoint(Ban ban) {
 }
 
 
-void Mouse::DrawBanShade(Ban ban) {
+void Mouse::DrawBanShade(Ban ban, Calc calc) {
     if (isClick()) {
         /*if (isBanOn(ban) && chooseX == mapX && chooseY == mapY) {
             this->isChoose = !this->isChoose;
@@ -57,7 +66,7 @@ void Mouse::DrawBanShade(Ban ban) {
         else
             this->isChoose = false;
     }
-    if (this->isChoose) {
+    if (this->isChoose && this->onPiece(calc)) {
         DrawBox(ban.ox + this->chooseX   * ban.masu_size, ban.oy + this->chooseY * ban.masu_size,
             ban.ox + (this->chooseX + 1) * ban.masu_size, ban.oy + (this->chooseY + 1) * ban.masu_size,
             GetColor(255, 0, 0), TRUE);
@@ -126,8 +135,6 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
     }
 }
 
-
-/* class ImageLoader */
 bool ImageLoader::file_exists(const char* str) {
     std::ifstream fs(str);
     return fs.is_open();
@@ -173,4 +180,3 @@ void ImageLoader::currentDir() {
     std::filesystem::path path = std::filesystem::current_path();
     std::cout << "Current Directory: " << path.string() << std::endl;
 }
-

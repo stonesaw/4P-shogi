@@ -7,6 +7,7 @@
 #include "Clac.h"
 #include <filesystem>
 
+
 const std::filesystem::path PATH = std::filesystem::current_path();
 
 
@@ -63,8 +64,9 @@ public:
     void Update();
     bool isBanOn(Ban ban);
     bool isClick();
+    bool onPiece(Calc calc);
     void SetMapPoint(Ban ban);
-    void DrawBanShade(Ban ban);
+    void DrawBanShade(Ban ban, Calc calc);
 };
 
 

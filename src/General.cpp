@@ -119,9 +119,9 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
             // •ÏX’†chisato
-           /* DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
-                this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1), );*/
-
+            /* DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
+               this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1), );*/
+        
         }
     }
 }
@@ -139,30 +139,33 @@ std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<std::string
     for (size_t i = 0; i < nameAndPath.size(); i++) {
         std::string name = nameAndPath.at(i).at(0);
         std::string path = nameAndPath.at(i).at(1);
-        if (!file_exists(path.c_str()))
-            throw std::invalid_argument("ImageLoder::Load() [Wrong to Path! '" + path + "']");
+
+        int graph = LoadGraph(path.c_str());
+        if (graph != -1)
+            map[name] = graph;
         else
-            map[name] = LoadGraph(path.c_str());
+            throw std::invalid_argument("ImageLoder::Load() [File Load Error '" + path + "']");
     }
+
     return map;
 }
 
 
 std::vector<std::vector<std::string>> ImageLoader::data = {
-    { "fu",      "./src/lib/image/fuhyou.png" },
-    { "kyo",     "./src/lib/image/kyousha.png" },
-    { "kei",     "./src/lib/image/keima.png" },
-    { "gin",     "./src/lib/image/ginshou.png" },
-    { "kin",     "./src/lib/image/kinshou.png" },
-    { "kaku",    "./src/lib/image/kakugyou.png" },
-    { "hisya",   "./src/lib/image/hisha.png" },
-    { "ou",      "./src/lib/image/oushou.png" },
-    { "tokin",   "./src/lib/image/tokin.png" },
-    { "narikyo", "./src/lib/image/narikyou.png" },
-    { "narikei", "./src/lib/image/narikei.png" },
-    { "narigin", "./src/lib/image/narigin.png" },
-    { "uma",     "./src/lib/image/ryuuma.png" },
-    { "ryu",     "./src/lib/image/ryuuou.png" }
+    { "fu",      "./lib/image/fuhyou.png" },
+    { "kyo",     "./lib/image/kyousha.png" },
+    { "kei",     "./lib/image/keima.png" },
+    { "gin",     "./lib/image/ginshou.png" },
+    { "kin",     "./lib/image/kinshou.png" },
+    { "kaku",    "./lib/image/kakugyou.png" },
+    { "hisya",   "./lib/image/hisha.png" },
+    { "ou",      "./lib/image/oushou.png" },
+    { "tokin",   "./lib/image/tokin.png" },
+    { "narikyo", "./lib/image/narikyou.png" },
+    { "narikei", "./lib/image/narikei.png" },
+    { "narigin", "./lib/image/narigin.png" },
+    { "uma",     "./lib/image/ryuuma.png" },
+    { "ryu",     "./lib/image/ryuuou.png" }
 };
 
 

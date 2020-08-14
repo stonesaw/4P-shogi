@@ -121,16 +121,19 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {
             // TO DO : DrawFormatString() -> DrawExtendGraph()
-            // masu_size‚ð‡‚í‚¹‚Ä•`‰æ(Šg‘åork¬)
-            // Calc::id2name‚ðŽg‚Á‚Äid‚ðname‚É’u‚«Š·‚¦‚Ä...
-            // image["‹î‚Ì–¼‘O"] ‚Åhandle‚ªŽæ‚ê‚é
+            // masu_sizeã‚’åˆã‚ã›ã¦æç”»(æ‹¡å¤§orç¸®å°)
+            // Calc::id2nameã‚’ä½¿ã£ã¦idã‚’nameã«ç½®ãæ›ãˆã¦...
+            // image["é§’ã®åå‰"] ã§handleãŒå–ã‚Œã‚‹
 
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
-            // •ÏX’†chisato
-            /* DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
-               this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1), );*/
-        
+            
+            DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
+                this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1),
+                image[calc.id2name(calc.board[y + 1][x + 1].id)], FALSE);
+            
+
+
         }
     }
 }

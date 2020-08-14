@@ -118,9 +118,11 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
 
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
-            // •ÏX’†chisato
-           /* DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
-                this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1), );*/
+            
+            DrawExtendGraph(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
+                this->ox + this->masu_size * (x + 1), this->oy + this->masu_size * (y + 1),
+                image[calc.id2name(calc.board[y + 1][x + 1].id)], FALSE);
+            
 
         }
     }

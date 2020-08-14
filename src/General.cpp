@@ -32,6 +32,15 @@ bool Mouse::isClick() {
 }
 
 
+bool Mouse::onPiece(Calc calc) {
+    int player = calc.board[mapY][mapX].player;
+    int turn = calc.turn % calc.playerSize;
+    if (player == turn)
+        return true;
+    else
+        return false;
+}
+
 void Mouse::SetMapPoint(Ban ban) {
     if (this->isBanOn(ban)) {
         this->mapX = (this->posX - ban.ox) / ban.masu_size;
@@ -44,7 +53,7 @@ void Mouse::SetMapPoint(Ban ban) {
 }
 
 
-void Mouse::DrawBanShade(Ban ban) {
+void Mouse::DrawBanShade(Ban ban, Calc calc) {
     if (isClick()) {
         /*if (isBanOn(ban) && chooseX == mapX && chooseY == mapY) {
             this->isChoose = !this->isChoose;
@@ -57,7 +66,7 @@ void Mouse::DrawBanShade(Ban ban) {
         else
             this->isChoose = false;
     }
-    if (this->isChoose) {
+    if (this->isChoose && this->onPiece(calc)) {
         DrawBox(ban.ox + this->chooseX   * ban.masu_size, ban.oy + this->chooseY * ban.masu_size,
             ban.ox + (this->chooseX + 1) * ban.masu_size, ban.oy + (this->chooseY + 1) * ban.masu_size,
             GetColor(255, 0, 0), TRUE);
@@ -112,9 +121,9 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
     for (int y = 0; y < 9; y++) {
         for (int x = 0; x < 9; x++) {
             // TO DO : DrawFormatString() -> DrawExtendGraph()
-            // masu_size‚ð‡‚í‚¹‚Ä•`‰æ(Šg‘åork¬)
-            // Calc::id2name‚ðŽg‚Á‚Äid‚ðname‚É’u‚«Š·‚¦‚Ä...
-            // image["‹î‚Ì–¼‘O"] ‚Åhandle‚ªŽæ‚ê‚é
+            // masu_sizeã‚’åˆã‚ã›ã¦æç”»(æ‹¡å¤§orç¸®å°)
+            // Calc::id2nameã‚’ä½¿ã£ã¦idã‚’nameã«ç½®ãæ›ãˆã¦...
+            // image["é§’ã®åå‰"] ã§handleãŒå–ã‚Œã‚‹
 
             DrawFormatString(this->ox + this->masu_size * x, this->oy + this->masu_size * y,
                 GetColor(0, 0, 0), "%d:%d", calc.board[y + 1][x + 1].player, calc.board[y + 1][x + 1].id);
@@ -124,12 +133,11 @@ void Ban::DrawPiece(Calc calc, std::map<std::string, int> image) {
                 image[calc.id2name(calc.board[y + 1][x + 1].id)], FALSE);
             
 
+
         }
     }
 }
 
-
-/* class ImageLoader */
 bool ImageLoader::file_exists(const char* str) {
     std::ifstream fs(str);
     return fs.is_open();
@@ -141,30 +149,33 @@ std::map<std::string, int> ImageLoader::Load(std::vector<std::vector<std::string
     for (size_t i = 0; i < nameAndPath.size(); i++) {
         std::string name = nameAndPath.at(i).at(0);
         std::string path = nameAndPath.at(i).at(1);
-        if (!file_exists(path.c_str()))
-            throw std::invalid_argument("ImageLoder::Load() [Wrong to Path! '" + path + "']");
+
+        int graph = LoadGraph(path.c_str());
+        if (graph != -1)
+            map[name] = graph;
         else
-            map[name] = LoadGraph(path.c_str());
+            throw std::invalid_argument("ImageLoder::Load() [File Load Error '" + path + "']");
     }
+
     return map;
 }
 
 
 std::vector<std::vector<std::string>> ImageLoader::data = {
-    { "fu",      "./src/lib/image/fuhyou.png" },
-    { "kyo",     "./src/lib/image/kyousha.png" },
-    { "kei",     "./src/lib/image/keima.png" },
-    { "gin",     "./src/lib/image/ginshou.png" },
-    { "kin",     "./src/lib/image/kinshou.png" },
-    { "kaku",    "./src/lib/image/kakugyou.png" },
-    { "hisya",   "./src/lib/image/hisha.png" },
-    { "ou",      "./src/lib/image/oushou.png" },
-    { "tokin",   "./src/lib/image/tokin.png" },
-    { "narikyo", "./src/lib/image/narikyou.png" },
-    { "narikei", "./src/lib/image/narikei.png" },
-    { "narigin", "./src/lib/image/narigin.png" },
-    { "uma",     "./src/lib/image/ryuuma.png" },
-    { "ryu",     "./src/lib/image/ryuuou.png" }
+    { "fu",      "./lib/image/fuhyou.png" },
+    { "kyo",     "./lib/image/kyousha.png" },
+    { "kei",     "./lib/image/keima.png" },
+    { "gin",     "./lib/image/ginshou.png" },
+    { "kin",     "./lib/image/kinshou.png" },
+    { "kaku",    "./lib/image/kakugyou.png" },
+    { "hisya",   "./lib/image/hisha.png" },
+    { "ou",      "./lib/image/oushou.png" },
+    { "tokin",   "./lib/image/tokin.png" },
+    { "narikyo", "./lib/image/narikyou.png" },
+    { "narikei", "./lib/image/narikei.png" },
+    { "narigin", "./lib/image/narigin.png" },
+    { "uma",     "./lib/image/ryuuma.png" },
+    { "ryu",     "./lib/image/ryuuou.png" }
 };
 
 
@@ -172,4 +183,3 @@ void ImageLoader::currentDir() {
     std::filesystem::path path = std::filesystem::current_path();
     std::cout << "Current Directory: " << path.string() << std::endl;
 }
-

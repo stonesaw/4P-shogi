@@ -11,8 +11,6 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     try {
-        //std::cout << "Current Directory: " << PATH << std::endl;
-        //ImageLoader::currentDir();
         Window window(1.5); // able to change (screen scale)
         std::map<std::string, int> image = ImageLoader::Load(ImageLoader::data);
 
@@ -40,16 +38,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             // update
             mouse.Update();
             mouse.SetMapPoint(ban);
-            calc.Update();
+            if (CheckHitKey(KEY_INPUT_SPACE)) calc.Update();
             
             // draw
             window.DrawBG(240, 240, 240);
             ban.DrawBase();
-            mouse.DrawBanShade(ban);
+            mouse.DrawBanShade(ban,calc);
             ban.DrawPiece(calc, image);
             ban.DrawFrame();
 
-            WaitTimer(10);
+            DrawFormatString(0, 0, GetColor(0, 0, 0), "Turn: %d", calc.turn);
+
+            WaitTimer(100);
         }
 
         std::cout << "Exit!" << std::endl;
